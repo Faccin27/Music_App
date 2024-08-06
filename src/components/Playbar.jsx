@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Play, Pause, SkipBack, SkipForward, Volume2, ChevronUp, Plus } from 'lucide-react';
-import { Slider } from '@/components/ui/slider';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Slider } from '@radix-ui/react-slider';
+import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
 
 const Playbar = () => {
   const [isPlaying, setIsPlaying] = useState(false);
