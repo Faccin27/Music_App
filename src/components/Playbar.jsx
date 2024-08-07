@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Play, Pause, SkipBack, SkipForward, Volume2, ChevronUp, Plus } from 'lucide-react';
 import { Slider } from '@radix-ui/react-slider';
 import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
+import Imageplayingnow from '../assets/images/default.png'
 
 const Playbar = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [progress, setProgress] = useState(30);
   const [volume, setVolume] = useState(70);
 
   const togglePlay = () => setIsPlaying(!isPlaying);
@@ -14,7 +15,7 @@ const Playbar = () => {
     <div className="fixed bottom-0 left-0 right-0 bg-black bg-opacity-60 backdrop-blur-md shadow-lg text-white p-4">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center space-x-4 w-1/4">
-          <img src="/api/placeholder/60/60" alt="Album cover" className="w-14 h-14 rounded-md" />
+          <img src={Imageplayingnow} alt="Album cover" className="w-14 h-14 rounded-md" />
           <div>
             <h3 className="font-semibold text-sm">Nome da Música</h3>
             <p className="text-xs text-gray-400">Artista</p>

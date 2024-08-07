@@ -1,22 +1,18 @@
 import React from 'react';
-import Navbar from './components/Navbar';
-import Dashboard from './components/Dashboard';
-import Playbar from './components/Playbar';
-import Sidebar from './components/Sidebar';
+import { BrowserRouter as Router, Route, Routes, BrowserRouter } from 'react-router-dom';
+import Dashboard from './Dashboard';
+import Playlist from './Playlist';
 
-const App = () => {
+function App() {
   return (
-    <div className="flex h-screen bg-gray-900 text-white">
-      <Sidebar />
-      <div className="flex flex-col flex-1">
-        <Navbar />
-        <main className="flex-1 overflow-y-auto p-4 ml-64 mt-16"> 
-          <Dashboard />
-        </main>
-        <Playbar />
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Dashboard/>}/>
+        <Route path='/playlist' element={<Playlist/>}/>
+        <Route path='*' element={<h1>Not found</h1>}/>
+      </Routes>
+    </BrowserRouter>
   );
-};
+}
 
 export default App;
