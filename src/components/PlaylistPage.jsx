@@ -26,7 +26,7 @@ const songs = [
 
 const PlaylistPage = () => {
   return (
-    <div className="p-8 bg-gray-900 text-white min-h-screen">
+    <div className="p-8 text-white min-h-screen">
       <div className="flex items-center mb-8">
         <img src={playlist.image} alt={playlist.name} className="w-64 h-64 object-cover rounded-lg shadow-lg mr-8" />
         <div>

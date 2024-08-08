@@ -12,7 +12,7 @@ const Playbar = () => {
   const togglePlay = () => setIsPlaying(!isPlaying);
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-black bg-opacity-60 backdrop-blur-md shadow-lg text-white p-4">
+    <div className=" fixed bottom-0 left-0 right-0 glassmorphism bg-black bg-opacity-60 backdrop-blur-md shadow-lg text-white p-4">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center space-x-4 w-1/4">
           <img src={Imageplayingnow} alt="Album cover" className="w-14 h-14 rounded-md" />

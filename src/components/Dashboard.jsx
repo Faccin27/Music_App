@@ -4,11 +4,11 @@ import profileImage from '../assets/images/default.png';
 import funkImage from '../assets/images/funk.jpg';
 import eletronicaImage from '../assets/images/eletronica.png';
 import sertanejoImage from '../assets/images/sertanejo.jpg';
-import profilepic from '../assets/images/profile.png'
+import profilepic from '../assets/images/profile.png';
 
 const UsuarioLogado = [
   { id: 1, name: 'Faccin', email: 'faccin@example.com', avatar: profilepic }
-]
+];
 
 const playlists = [
   { id: 1, name: 'Top Hits 2024', image: sertanejoImage, songs: 50, creator: 'Future Rhythm' },
@@ -33,7 +33,7 @@ const recentlyPlayed = [
 
 const Dashboard = () => {
   return (
-    <div className="p-8 bg-gray-900 text-white min-h-screen">
+    <div className="glassmorphism-container ">
       <h1 className="text-4xl font-bold mb-8">Bem-vindo de volta {UsuarioLogado[0].name}!</h1>
 
       <section className="mb-12">
