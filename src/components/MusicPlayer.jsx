@@ -21,11 +21,29 @@ const playlists = [
     { id: 12, name: 'Epic Journeys', image: profileImage, songs: 42, creator: 'Future Rhythm' },
 ];
 
+const songs = [
+    { id: 1, name: 'Envolver', artist: 'Anitta', album: 'Versions of Me', duration: '3:14', image: wiu },
+    { id: 2, name: 'Amarelo, Azul e Branco', artist: 'Anavitória', album: 'O Tempo é Agora', duration: '3:40', image: wiu },
+    { id: 3, name: 'Evidências', artist: 'Chitãozinho & Xororó', album: 'Evidências', duration: '4:39', image: wiu },
+    { id: 4, name: 'Hear Me Now', artist: 'Alok, Bruno Martini, Zeeba', album: 'Hear Me Now', duration: '3:12', image: wiu },
+    { id: 5, name: 'Vai Malandra', artist: 'Anitta, Mc Zaac, Maejor ft. Tropkillaz & DJ Yuri Martins', album: 'Vai Malandra', duration: '3:01', image: wiu },
+    { id: 6, name: 'Batom de Cereja', artist: 'Israel & Rodolffo', album: 'Batom de Cereja', duration: '2:47', image: wiu },
+    { id: 7, name: 'Girl From Rio', artist: 'Anitta', album: 'Girl From Rio', duration: '3:26', image: wiu },
+    { id: 8, name: 'Amor de Que', artist: 'Pabllo Vittar', album: '111', duration: '2:52', image: wiu },
+];
+
 export default function MusicPlayer() {
     const [showPlaylists, setShowPlaylists] = useState(false);
+    const [showTracks, setShowTracks] = useState(false);
 
     const handlePlaylistsClick = () => {
-        setShowPlaylists(!showPlaylists);
+        setShowPlaylists(true);
+        setShowTracks(false);
+    };
+
+    const handleTracksClick = () => {
+        setShowTracks(true);
+        setShowPlaylists(false);
     };
 
     return (
@@ -87,8 +105,9 @@ export default function MusicPlayer() {
                     <div className="flex justify-center mb-4">
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-md w-full">
                             <div
-                                className="flex items-center justify-center p-2 hover:bg-gray-200 hover:bg-opacity-20 transition duration-300"
+                                className="flex items-center justify-center p-2 hover:bg-gray-200 hover:bg-opacity-20 transition duration-300 cursor-pointer"
                                 style={{ borderRadius: '8px' }}
+                                onClick={handleTracksClick}
                             >
                                 <span className="font-medium">Tracks</span>
                             </div>
@@ -99,7 +118,7 @@ export default function MusicPlayer() {
                                 <span className="font-medium">Albums</span>
                             </div>
                             <div
-                                className="flex items-center justify-center p-2 hover:bg-gray-200 hover:bg-opacity-20 transition duration-300"
+                                className="flex items-center justify-center p-2 hover:bg-gray-200 hover:bg-opacity-20 transition duration-300 cursor-pointer"
                                 style={{ borderRadius: '8px' }}
                                 onClick={handlePlaylistsClick}
                             >
@@ -123,6 +142,37 @@ export default function MusicPlayer() {
                                     <p className="mt-2 text-center text-sm font-medium">{playlist.name}</p>
                                 </div>
                             ))}
+                        </div>
+                    )}
+
+                    {showTracks && (
+                        <div className="w-full overflow-x-auto">
+                            <table className="w-full border-collapse">
+                                <thead>
+                                    <tr className="border-b border-gray-200">
+                                        <th className="px-4 py-2 text-left">#</th>
+                                        <th className="px-4 py-2 text-left">Title</th>
+                                        <th className="px-4 py-2 text-left">Album</th>
+                                        <th className="px-4 py-2 text-right">Duration</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {songs.map((song, index) => (
+                                        <tr key={song.id} className="border-b border-gray-400 hover:bg-gray-700 hover:bg-opacity-90">
+                                            <td className="px-4 py-2 flex items-center">
+                                                <img src={song.image} alt={song.name} className="w-10 h-10 mr-2 rounded" />
+                                                {index + 1}
+                                            </td>
+                                            <td className="px-4 py-2">
+                                                <div>{song.name}</div>
+                                                <div className="text-sm text-gray-500">{song.artist}</div>
+                                            </td>
+                                            <td className="px-4 py-2">{song.album}</td>
+                                            <td className="px-4 py-2 text-right">{song.duration}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
                         </div>
                     )}
                 </div>

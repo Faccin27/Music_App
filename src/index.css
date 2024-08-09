@@ -4,7 +4,7 @@
 
 
 body {
-    background: url('./assets/images/bk3.jpg') no-repeat center center fixed; 
+    background: url('./assets/images/bk.jpg') no-repeat center center fixed; 
     background-size: cover;
     backdrop-filter: blur(10px);
   }
