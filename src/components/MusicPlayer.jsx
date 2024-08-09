@@ -85,7 +85,7 @@ export default function MusicPlayer() {
                 </div>
                 <div className="w-full md:w-1/2 mt-4 md:mt-0">
                     <div className="flex justify-center mb-4">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-md w-full">
                             <div
                                 className="flex items-center justify-center p-2 hover:bg-gray-200 hover:bg-opacity-20 transition duration-300"
                                 style={{ borderRadius: '8px' }}
