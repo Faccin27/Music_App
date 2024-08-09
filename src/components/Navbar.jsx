@@ -34,7 +34,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-black bg-opacity-60 backdrop-blur-md shadow-lg fixed top-0 left-0 w-full z-10 flex justify-between items-center p-4 h-16">
+    <nav className="bg-black bg-opacity-80 backdrop-blur-md shadow-lg fixed top-0 left-0 w-full z-10 flex justify-between items-center p-4 h-16">
       <div className="text-xl font-bold">Music App</div>
       <div className="relative flex items-center">
         <input 

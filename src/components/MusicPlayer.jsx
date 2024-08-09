@@ -1,20 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from './ui/button';
-import wiu from '../assets/images/default.png'
+import wiu from '../assets/images/default.png';
+import sertanejoImage from '../assets/images/sertanejo.jpg';
+import eletronicaImage from '../assets/images/eletronica.png';
+import funkImage from '../assets/images/funk.jpg';
+import profileImage from '../assets/images/profile.png';
+
+const playlists = [
+    { id: 1, name: 'Top Hits 2024', image: sertanejoImage, songs: 50, creator: 'Future Rhythm' },
+    { id: 2, name: 'Chill Vibes', image: eletronicaImage, songs: 30, creator: 'Future Rhythm' },
+    { id: 3, name: 'Workout Mix', image: funkImage, songs: 25, creator: 'Future Rhythm' },
+    { id: 4, name: 'Road Trip Jams', image: profileImage, songs: 40, creator: 'Future Rhythm' },
+    { id: 5, name: 'Dance Party', image: eletronicaImage, songs: 45, creator: 'Future Rhythm' },
+    { id: 6, name: 'Relaxing Beats', image: sertanejoImage, songs: 35, creator: 'Future Rhythm' },
+    { id: 7, name: 'Summer Vibes', image: funkImage, songs: 20, creator: 'Future Rhythm' },
+    { id: 8, name: 'Evening Chill', image: profileImage, songs: 28, creator: 'Future Rhythm' },
+    { id: 9, name: 'Morning Boost', image: sertanejoImage, songs: 32, creator: 'Future Rhythm' },
+    { id: 10, name: 'Indie Favorites', image: eletronicaImage, songs: 29, creator: 'Future Rhythm' },
+    { id: 11, name: 'Feel-Good Tunes', image: funkImage, songs: 38, creator: 'Future Rhythm' },
+    { id: 12, name: 'Epic Journeys', image: profileImage, songs: 42, creator: 'Future Rhythm' },
+];
 
 export default function MusicPlayer() {
+    const [showPlaylists, setShowPlaylists] = useState(false);
+
+    const handlePlaylistsClick = () => {
+        setShowPlaylists(!showPlaylists);
+    };
+
     return (
-        <div className="flex flex-col h-screen bg-background text-foreground">
-            <main className="flex-1 grid grid-cols-1 md:grid-cols-2 items-start justify-center gap-8 p-4 md:p-8">
-                <div className="flex flex-col items-center justify-start gap-4">
+        <div className="flex flex-col h-screen text-foreground">
+            <main className="flex-1 flex flex-col md:flex-row items-start justify-center p-4 md:p-8">
+                <div className="flex flex-col items-center justify-start gap-2 w-full md:w-1/2">
                     <div className="relative w-full max-w-md aspect-square rounded-lg overflow-hidden">
                         <img
                             src={wiu}
                             alt="Album Cover"
-                            width={400}
-                            height={400}
                             className="object-cover w-full h-full"
-                            style={{ aspectRatio: "400/400", objectFit: "cover" }}
+                            style={{ borderRadius: '8px' }}
                         />
                     </div>
                     <div className="text-center">
@@ -56,25 +79,52 @@ export default function MusicPlayer() {
                                     <span className="block w-1.5 h-1.5 bg-gray-600 rounded-full mx-auto my-1"></span>
                                     <span className="block w-1.5 h-1.5 bg-gray-600 rounded-full mx-auto my-1"></span>
                                 </button>
-
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col gap-6 items-start">
-                    <div className="grid grid-cols-3 gap-4 w-full">
-                        <div className="flex items-start justify-start">
-                            <span className="font-medium">Tracks</span>
-                        </div>
-                        <div className="flex items-start justify-start">
-                            <span className="font-medium">Albums</span>
-                        </div>
-                        <div className="flex items-start justify-start">
-                            <span className="font-medium">Playlists</span>
+                <div className="w-full md:w-1/2 mt-4 md:mt-0">
+                    <div className="flex justify-center mb-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
+                            <div
+                                className="flex items-center justify-center p-2 hover:bg-gray-200 hover:bg-opacity-20 transition duration-300"
+                                style={{ borderRadius: '8px' }}
+                            >
+                                <span className="font-medium">Tracks</span>
+                            </div>
+                            <div
+                                className="flex items-center justify-center p-2 hover:bg-gray-200 hover:bg-opacity-20 transition duration-300"
+                                style={{ borderRadius: '8px' }}
+                            >
+                                <span className="font-medium">Albums</span>
+                            </div>
+                            <div
+                                className="flex items-center justify-center p-2 hover:bg-gray-200 hover:bg-opacity-20 transition duration-300"
+                                style={{ borderRadius: '8px' }}
+                                onClick={handlePlaylistsClick}
+                            >
+                                <span className="font-medium">Playlists</span>
+                            </div>
                         </div>
                     </div>
 
-
+                    {showPlaylists && (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
+                            {playlists.map((playlist) => (
+                                <div key={playlist.id} className="flex flex-col items-center">
+                                    <div className="w-full max-w-[200px] h-[200px] relative">
+                                        <img
+                                            src={playlist.image}
+                                            alt={playlist.name}
+                                            className="w-full h-full object-cover"
+                                            style={{ borderRadius: '8px' }}
+                                        />
+                                    </div>
+                                    <p className="mt-2 text-center text-sm font-medium">{playlist.name}</p>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </main>
         </div>
@@ -115,28 +165,7 @@ function HeartIcon(props) {
             strokeLinecap="round"
             strokeLinejoin="round"
         >
-            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-        </svg>
-    );
-}
-
-function MoveHorizontalIcon(props) {
-    return (
-        <svg
-            {...props}
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        >
-            <polyline points="18 8 22 12 18 16" />
-            <polyline points="6 8 2 12 6 16" />
-            <line x1="2" x2="22" y1="12" y2="12" />
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 1 8.5c0 2.29 1.51 4.04 3 5.5L12 21l7-7z" />
         </svg>
     );
 }
@@ -155,7 +184,7 @@ function PlayIcon(props) {
             strokeLinecap="round"
             strokeLinejoin="round"
         >
-            <polygon points="6 3 20 12 6 21 6 3" />
+            <polygon points="5 3 19 12 5 21 5 3" />
         </svg>
     );
 }
