@@ -4,13 +4,22 @@
 
 
 body {
-    background: url('./assets/images/bk.jpg') no-repeat center center fixed; 
-    background-size: cover;
-    backdrop-filter: blur(10px);
-  }
-  
-  .glassmorphism {
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  } 
+  background: url('./assets/images/bk4.jpg') no-repeat center center fixed;
+  background-size: cover;
+  backdrop-filter: blur(100px);
+}
+
+.glassmorphism {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+}
+
+.fade-in.show {
+  opacity: 1;
+}

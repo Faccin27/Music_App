@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search } from 'lucide-react'; 
+import { Search } from 'lucide-react';
 import profilepic from '../assets/images/profile.png';
 
 const UsuarioLogado = [
@@ -37,14 +37,14 @@ const Navbar = () => {
     <nav className="bg-black bg-opacity-80 backdrop-blur-md shadow-lg fixed top-0 left-0 w-full z-10 flex justify-between items-center p-4 h-16">
       <div className="text-xl font-bold">Music App</div>
       <div className="relative flex items-center">
-        <input 
-          type="text" 
-          placeholder="Busque por músicas, playlists, artistas e mais." 
+        <input
+          type="text"
+          placeholder="Busque por músicas, playlists, artistas e mais."
           className="bg-black bg-opacity-60 backdrop-blur-md shadow-lg rounded-full p-2 pl-10 pr-4 outline-none w-96" // Aumenta a largura e adiciona padding para o ícone
         />
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white" /> {/* Ícone da lupa */}
       </div>
-      <div 
+      <div
         className="relative flex items-center"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -56,8 +56,13 @@ const Navbar = () => {
           onClick={handleDropdownClick}
         />
         {isDropdownOpen && (
-          <div 
-            className="absolute right-12 top-full mt-2 bg-black bg-opacity-60 backdrop-blur-md shadow-lg rounded-lg min-w-max"
+          <div
+            className={`absolute right-12 top-full mt-2 bg-black bg-opacity-60 backdrop-blur-md shadow-lg min-w-max ${isDropdownOpen ? 'opacity-100' : 'opacity-0'}`}
+            style={{
+              borderRadius: '0.5rem',
+              transition: 'opacity 300ms ease-in-out',
+              opacity: isDropdownOpen ? 1 : 0
+            }}
             onClick={handleDropdownClick}
             onMouseEnter={() => setIsDropdownHovered(true)}
             onMouseLeave={() => setIsDropdownHovered(false)}
