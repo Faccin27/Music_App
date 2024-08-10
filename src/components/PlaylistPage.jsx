@@ -1,17 +1,8 @@
 import React from 'react';
-import { Play, Clock, Heart } from 'lucide-react';
-import playlistImage from '../assets/images/eletronica.png';
+import { Play, Heart, Download } from 'lucide-react';
+import NowPlaying from './NowPlaying';
+import wiu from '../assets/images/eletronica.png';
 import SongImage from '../assets/images/funk.jpg'
-// Dummy data for the playlist
-const playlist = {
-  id: 1,
-  name: 'Top Hits 2024',
-  image: playlistImage,
-  creator: 'Future Rhythm',
-  totalSongs: 50,
-  totalDuration: '2h 45min',
-  description: 'Os maiores hits do momento em uma só playlist!',
-};
 
 const songs = [
   { id: 1, name: 'Envolver', artist: 'Anitta', album: 'Versions of Me', duration: '3:14', image: SongImage },
@@ -22,69 +13,82 @@ const songs = [
   { id: 6, name: 'Batom de Cereja', artist: 'Israel & Rodolffo', album: 'Batom de Cereja', duration: '2:47', image: SongImage },
   { id: 7, name: 'Girl From Rio', artist: 'Anitta', album: 'Girl From Rio', duration: '3:26', image: SongImage },
   { id: 8, name: 'Amor de Que', artist: 'Pabllo Vittar', album: '111', duration: '2:52', image: SongImage },
+  { id: 9, name: 'Todo Dia', artist: 'MC Livinho', album: 'Dance', duration: '3:25', image: SongImage },
+  { id: 10, name: 'Te Pego de Jeito', artist: 'Sorriso Maroto', album: 'Sorriso 20 Anos', duration: '3:50', image: SongImage },
+  { id: 11, name: 'Coração de Aço', artist: 'Thiaguinho', album: 'Desenho de Deus', duration: '4:05', image: SongImage },
+  { id: 12, name: 'Despacito', artist: 'Luis Fonsi ft. Daddy Yankee', album: 'Vida', duration: '3:48', image: SongImage },
+  { id: 13, name: 'Apenas Mais Uma de Amor', artist: 'Luan Santana', album: 'Luan Santana – Ao Vivo', duration: '3:34', image: SongImage },
+  { id: 14, name: 'Não Perco Meu Tempo', artist: 'Giulia Be', album: 'Ai, Ai, Ai', duration: '3:09', image: SongImage },
+  { id: 15, name: 'Se Agora É Pra Morrer', artist: 'Jorge & Mateus', album: 'Terra Sem CEP', duration: '3:22', image: SongImage },
+  { id: 16, name: 'Medo Bobo', artist: 'Maiara & Maraísa', album: 'Maiara & Maraísa', duration: '3:18', image: SongImage },
 ];
 
-const PlaylistPage = () => {
-  return (
-    <div className="p-8 text-white min-h-screen">
-      <div className="flex items-center mb-8">
-        <img src={playlist.image} alt={playlist.name} className="w-64 h-64 object-cover rounded-lg shadow-lg mr-8" />
-        <div>
-          <h1 className="text-4xl font-bold mb-2">{playlist.name}</h1>
-          <p className="text-gray-400 mb-2">Criado por {playlist.creator}</p>
-          <p className="text-gray-400 mb-4">{playlist.totalSongs} músicas • {playlist.totalDuration}</p>
-          <p className="text-sm mb-4">{playlist.description}</p>
-          <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full mr-4">
-            Reproduzir
-          </button>
-          <button className="border border-white hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-full">
-            Seguir
-          </button>
-        </div>
-      </div>
-
-      <section>
-        <div className="bg-gray-800 rounded-lg shadow-md overflow-hidden">
-          <table className="w-full">
-            <thead className="bg-gray-700">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">#</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Título</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Álbum</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                  <Clock className="w-4 h-4" />
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-700">
-              {songs.map((song, index) => (
-                <tr key={song.id} className="hover:bg-gray-700">
-                  <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
-                      <img src={song.image} alt={song.name} className="w-10 h-10 object-cover rounded-sm mr-4" />
-                      <Play className="w-4 h-4 mr-2 cursor-pointer text-green-500" />
-                      <div>
-                        <div className="font-medium">{song.name}</div>
-                        <div className="text-sm text-gray-400">{song.artist}</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">{song.album}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center justify-between">
-                      <Heart className="w-4 h-4 mr-2 cursor-pointer text-gray-400 hover:text-red-500" />
-                      <span>{song.duration}</span>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-    </div>
-  );
+const scrollbarHiddenStyle = {
+  scrollbarWidth: 'none',
+  msOverflowStyle: 'none',
+  '&::-webkit-scrollbar': {
+    display: 'none'
+  }
 };
 
-export default PlaylistPage;
+export default function Component() {
+  return (
+    <div className="text-white min-h-screen p-8 flex justify-center items-start">
+      {/* LEFT SIDE TOCANDO AGORA*/}
+      <div className="w-1/2 max-w-xl pr-8">
+        <NowPlaying />
+      </div>
+
+      {/* Right side - Playlist */}
+      <div className="w-1/2 max-w-xl pl-8">
+        <div className="mx-auto">
+          <img
+            src={wiu}
+            alt="Top Brasil Playlist"
+            className="w-56 h-56 object-cover mx-auto mb-4"
+            style={{
+              borderRadius: '0.375rem',
+              marginBottom: '7dvh'
+            }}
+          />
+          <h1 className="text-3xl font-bold text-center mb-4">Top Brasil</h1>
+
+          <div className="flex justify-center space-x-3 mb-4">
+            <button className="bg-blue-500 text-black font-semibold py-2 px-6 rounded-full flex items-center">
+              <Play className="mr-2" size={18} />
+              Play
+            </button>
+            <button className="text-white p-2" style={{ fontWeight: 'bold' }}>
+              <Heart size={24} />
+            </button>
+
+            <button className="text-white p-2" style={{ fontWeight: 'bold' }} >
+              <Download size={24} />
+            </button>
+          </div>
+
+          <p className="text-zinc-400 text-center mb-6 text-sm">
+            Anitta, Anavitória e os maiores hits do país. O que tá bombando tá aqui.
+          </p>
+
+          <div className="space-y-2 overflow-y-auto max-h-[calc(100vh-400px)]" style={scrollbarHiddenStyle}>
+            {songs.map((song) => (
+              <div key={song.id} className="flex items-center space-x-3 hover:bg-zinc-800 p-2 rounded-md">
+                <img
+                  src={song.image}
+                  alt={`${song.name} cover`}
+                  className="w-10 h-10 object-cover"
+                />
+                <div className="flex-grow">
+                  <p className="font-semibold text-sm">{song.name}</p>
+                  <p className="text-zinc-400 text-xs">{song.artist}</p>
+                </div>
+                <span className="text-zinc-400 text-xs">{song.duration}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
