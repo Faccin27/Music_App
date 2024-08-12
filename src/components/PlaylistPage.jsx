@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Play, Heart, Download } from 'lucide-react';
 import NowPlaying from './NowPlaying';
 import wiu from '../assets/images/eletronica.png';
-import SongImage from '../assets/images/funk.jpg'
+import SongImage from '../assets/images/funk.jpg';
 
 const songs = [
   { id: 1, name: 'Envolver', artist: 'Anitta', album: 'Versions of Me', duration: '3:14', image: SongImage },
@@ -32,15 +32,17 @@ const scrollbarHiddenStyle = {
 };
 
 export default function Component() {
+  const [hoveredSong, setHoveredSong] = useState(null);
+
   return (
     <div className="text-white min-h-screen p-8 flex justify-center items-start">
-      {/* LEFT SIDE TOCANDO AGORA*/}
-      <div className="w-1/2 max-w-xl pr-8">
+      {/* LEFT SIDE TOCANDO AGORA */}
+      <div className="w-full md:w-1/2 mt-4 md:mt-0 flex justify-center">
         <NowPlaying />
       </div>
 
       {/* Right side - Playlist */}
-      <div className="w-1/2 max-w-xl pl-8">
+      <div className="w-1/2">
         <div className="mx-auto">
           <img
             src={wiu}
@@ -62,7 +64,7 @@ export default function Component() {
               <Heart size={24} />
             </button>
 
-            <button className="text-white p-2" style={{ fontWeight: 'bold' }} >
+            <button className="text-white p-2" style={{ fontWeight: 'bold' }}>
               <Download size={24} />
             </button>
           </div>
@@ -71,24 +73,41 @@ export default function Component() {
             Anitta, Anavitória e os maiores hits do país. O que tá bombando tá aqui.
           </p>
 
-          <div className="space-y-2 overflow-y-auto max-h-[calc(100vh-400px)]" style={scrollbarHiddenStyle}>
-            {songs.map((song) => (
-              <div key={song.id} className="flex items-center space-x-3 hover:bg-zinc-800 p-2 rounded-md">
-                <img
-                  src={song.image}
-                  alt={`${song.name} cover`}
-                  className="w-10 h-10 object-cover"
-                />
-                <div className="flex-grow">
-                  <p className="font-semibold text-sm">{song.name}</p>
-                  <p className="text-zinc-400 text-xs">{song.artist}</p>
+          <div className="space-y-2 overflow-y-auto max-h-[calc(50vh-100px)]" style={scrollbarHiddenStyle}>
+            {songs.map((song, index) => (
+              <React.Fragment key={song.id}>
+                <div
+                  className="flex items-center space-x-3 hover:bg-zinc-600 p-2 rounded-md"
+                  style={{ borderRadius: 12 }}
+                  onMouseEnter={() => setHoveredSong(song.id)}
+                  onMouseLeave={() => setHoveredSong(null)}
+                >
+                  <div className="flex items-center space-x-2">
+                    <div
+                      className={`transition-opacity duration-200 ${hoveredSong === song.id ? 'opacity-100' : 'opacity-0'}`}
+                    >
+                      <Play className="text-blue, fill-white" size={28} />
+                    </div>
+                    <img
+                      src={song.image}
+                      alt={`${song.name} cover`}
+                      className="w-10 h-10 object-cover rounded-md"
+                    />
+                  </div>
+                  <div className="flex-grow">
+                    <p className="font-semibold text-sm">{song.name}</p>
+                    <p className="text-zinc-400 text-xs">{song.artist}</p>
+                  </div>
+                  <span className="text-zinc-400 text-xs">{song.duration}</span>
                 </div>
-                <span className="text-zinc-400 text-xs">{song.duration}</span>
-              </div>
+                {index < songs.length - 1 && (
+                  <div className="h-px bg-zinc-300 mx-2" />
+                )}
+              </React.Fragment>
             ))}
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

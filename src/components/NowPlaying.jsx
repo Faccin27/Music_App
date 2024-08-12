@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
 import { Button } from './ui/button';
 import wiu from '../assets/images/futil.png';
-
+import { Play } from "@phosphor-icons/react";
 export default function NowPlaying() {
-    const [isPlaying, setIsPlaying] = useState(false); // Adiciona estado para controle de reprodução
-    const [isShuffling, setIsShuffling] = useState(false); // Adiciona estado para controle de reprodução aleatória
+    const [isPlaying, setIsPlaying] = useState(false); 
+    const [isShuffling, setIsShuffling] = useState(false);
+    const [isRepeating, setIsRepeating] = useState(false);
 
     const togglePlayPause = () => {
-        setIsPlaying(!isPlaying); // Alterna o estado de reprodução
+        setIsPlaying(!isPlaying);
     };
 
     const toggleShuffle = () => {
-        setIsShuffling(!isShuffling); // Alterna o estado de shuffle
+        setIsShuffling(!isShuffling); 
+    };
+
+    const toggleRepeat = () => {
+        setIsRepeating(!isRepeating);
     };
 
     return (
@@ -51,11 +56,14 @@ export default function NowPlaying() {
                             className="relative z-10"
                             onClick={togglePlayPause}
                         >
-                            {isPlaying ? <PlayIcon className="w-10 h-10" />  : <PauseIcon className="w-10 h-10" />}
+                            {isPlaying ? <PauseIcon className="w-10 h-10 flex justify-center items-center self-center" /> : <Play size={32} color="#c32c2c" weight="fill" />}
                         </Button>
                     </div>
                     <Button variant="ghost" size="icon">
                         <SkipForwardIcon className="w-6 h-6" />
+                    </Button>
+                    <Button variant="ghost" size="icon" onClick={toggleRepeat}>
+                        <RepeatIcon className={`w-6 h-6 ${isRepeating ? 'text-primary' : 'text-muted-foreground'}`} />
                     </Button>
                 </div>
                 <div className="flex items-center justify-between mt-4">
@@ -147,8 +155,6 @@ function PlayIcon(props) {
         <svg
             {...props}
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -166,8 +172,6 @@ function PauseIcon(props) {
         <svg
             {...props}
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -180,7 +184,6 @@ function PauseIcon(props) {
         </svg>
     );
 }
-
 
 function HeartIcon(props) {
     return (
@@ -196,7 +199,7 @@ function HeartIcon(props) {
             strokeLinecap="round"
             strokeLinejoin="round"
         >
-            <path d="M21 4.29a6.43 6.43 0 0 0-9 0L12 5.29l-0.71-0.71a6.43 6.43 0 0 0-9 9l9 9 9-9a6.43 6.43 0 0 0 0-9z" />
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
         </svg>
     );
 }
@@ -223,6 +226,22 @@ function Volume2Icon(props) {
     );
 }
 
-
-
-
+function RepeatIcon(props) {
+    return (
+        <svg
+            {...props}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        >
+            <polyline points="17 1 21 5 17 9" />
+            <path d="M3 11V9a4 4 0 0 1 4-4h14" />
+            <polyline points="7 23 3 19 7 15" />
+            <path d="M21 13v2a4 4 0 0 1-4 4H3" />
+        </svg>
+    );
+}
