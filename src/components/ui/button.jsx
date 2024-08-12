@@ -1,9 +1,9 @@
 // src/components/ui/Button.js
 import React from 'react';
 
-export function Button({ variant, size, children }) {
+export function Button({children }) {
   return (
-    <button className={`btn ${variant} ${size}`}>
+    <button>
       {children}
     </button>
   );
