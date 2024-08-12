@@ -19,10 +19,9 @@ export default function NowPlaying() {
     const toggleRepeat = () => {
         setIsRepeating(!isRepeating);
     };
-
-    // Dados de exemplo para a barra de progresso
-    const currentTime = 45; // Exemplo de tempo atual em segundos
-    const totalTime = 263; // Exemplo de tempo total em segundos (4:23)
+    // willian 
+    const currentTime = 45; 
+    const totalTime = 263; 
     const volumeLevels = Array.from({ length: 100 }, () => Math.random() * 100);
 
     // Função auxiliar para formatar o tempo
