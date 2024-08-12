@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Play, Heart, Download } from 'lucide-react';
+import { Play, Heart, Download, PlayCircle, MoreHorizontal } from 'lucide-react';
 import NowPlaying from './NowPlaying';
 import wiu from '../assets/images/eletronica.png';
 import SongImage from '../assets/images/funk.jpg';
@@ -73,39 +73,40 @@ export default function Component() {
             Anitta, Anavitória e os maiores hits do país. O que tá bombando tá aqui.
           </p>
 
-          <div className="space-y-2 overflow-y-auto max-h-[calc(50vh-100px)]" style={scrollbarHiddenStyle}>
+          <div className="space-y-2">
             {songs.map((song, index) => (
-              <React.Fragment key={song.id}>
-                <div
-                  className="flex items-center space-x-3 hover:bg-zinc-600 p-2 rounded-md"
-                  style={{ borderRadius: 12 }}
-                  onMouseEnter={() => setHoveredSong(song.id)}
-                  onMouseLeave={() => setHoveredSong(null)}
-                >
-                  <div className="flex items-center space-x-2">
-                    <div
-                      className={`transition-opacity duration-200 ${hoveredSong === song.id ? 'opacity-100' : 'opacity-0'}`}
-                    >
-                      <Play className="text-blue, fill-white" size={28} />
-                    </div>
-                    <img
-                      src={song.image}
-                      alt={`${song.name} cover`}
-                      className="w-10 h-10 object-cover rounded-md"
-                    />
+              <div
+                key={song.id}
+                className={`flex items-center justify-between p-2 rounded-lg ${index % 2 === 0 ? 'bg-transparent' : 'bg-gray-800 bg-opacity-30'}`}
+                onMouseEnter={() => setHoveredSong(song.id)}
+                onMouseLeave={() => setHoveredSong(null)}
+              >
+                <div className="flex items-center space-x-3 flex-grow">
+                  <div className="relative">
+                    <img src={song.image} alt={song.name} className="w-10 h-10 rounded" />
+                    {hoveredSong === song.id && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg">
+                        <PlayCircle className="text-white" size={24} />
+                      </div>
+                    )}
                   </div>
-                  <div className="flex-grow">
-                    <p className="font-semibold text-sm">{song.name}</p>
-                    <p className="text-zinc-400 text-xs">{song.artist}</p>
+                  <div>
+                    <p className="font-medium">{song.name}</p>
+                    <p className="text-sm text-gray-400">{song.artist}</p>
                   </div>
-                  <span className="text-zinc-400 text-xs">{song.duration}</span>
                 </div>
-                {index < songs.length - 1 && (
-                  <div className="h-px bg-zinc-300 mx-2" />
-                )}
-              </React.Fragment>
+                <div className="flex items-center space-x-4 transition-all duration-300 ease-in-out">
+                  <span className={`text-sm text-gray-400 transition-all duration-300 ease-in-out ${hoveredSong === song.id ? 'mr-8' : 'mr-0'}`}>
+                    {song.duration}
+                  </span>
+                  {hoveredSong === song.id && (
+                    <MoreHorizontal className="text-gray-400 cursor-pointer transition-opacity duration-300 ease-in-out opacity-100" size={20} />
+                  )}
+                </div>
+              </div>
             ))}
           </div>
+
         </div>
       </div>
     </div>

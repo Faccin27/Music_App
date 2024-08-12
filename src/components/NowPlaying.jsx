@@ -57,7 +57,7 @@ export default function NowPlaying() {
                             className="relative z-10"
                             onClick={togglePlayPause}
                         >
-                            {isPlaying ? <Pause size={32} className="w-10 h-10 flex justify-center items-center self-center" /> : <Play size={32} color="#c32c2c" weight="fill" />}
+                            {isPlaying ? <Pause size={32} weight="fill"/> : <Play size={32}  weight="fill" />}
                         </Button>
                     </div>
                     <Button variant="ghost" size="icon">

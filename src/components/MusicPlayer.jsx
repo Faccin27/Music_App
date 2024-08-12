@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import NowPlaying from './NowPlaying';
-import { Button } from './ui/button';
+import { Button } from '@/components/ui/button';
+import { PlayCircle, MoreHorizontal } from 'lucide-react';
 import wiu from '../assets/images/default.png';
 import sertanejoImage from '../assets/images/sertanejo.jpg';
 import eletronicaImage from '../assets/images/eletronica.png';
@@ -36,6 +37,7 @@ const songs = [
 export default function MusicPlayer() {
     const [showPlaylists, setShowPlaylists] = useState(false);
     const [showTracks, setShowTracks] = useState(false);
+    const [hoveredSong, setHoveredSong] = useState(null);
 
     const handlePlaylistsClick = () => {
         setShowPlaylists(true);
@@ -51,10 +53,10 @@ export default function MusicPlayer() {
         setShowPlaylists(false);
         setShowTracks(false);
     };
+
     return (
         <div className="flex flex-col h-screen text-foreground">
             <main className="flex-1 flex flex-col md:flex-row items-start justify-center p-4 md:p-8">
-                {/* AQUI VAI A MUSICA TOCANDO AGORA. */}
                 <NowPlaying />
 
                 <div className="w-full md:w-1/2 mt-4 md:mt-0">
@@ -70,6 +72,7 @@ export default function MusicPlayer() {
                             <div
                                 className="flex items-center justify-center p-2 hover:bg-gray-200 hover:bg-opacity-20 transition duration-300"
                                 style={{ borderRadius: '8px' }}
+                                onClick={handleAlbumsClick}
                             >
                                 <span className="font-medium">Albums</span>
                             </div>
@@ -102,33 +105,38 @@ export default function MusicPlayer() {
                     )}
 
                     {showTracks && (
-                        <div className="w-full overflow-x-auto">
-                            <table className="w-full border-collapse">
-                                <thead>
-                                    <tr className="border-b border-gray-200">
-                                        <th className="px-4 py-2 text-left">#</th>
-                                        <th className="px-4 py-2 text-left">Title</th>
-                                        <th className="px-4 py-2 text-left">Album</th>
-                                        <th className="px-4 py-2 text-right">Duration</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {songs.map((song, index) => (
-                                        <tr key={song.id} className="border-b border-gray-400 hover:bg-gray-700 hover:bg-opacity-90">
-                                            <td className="px-4 py-2 flex items-center">
-                                                <img src={song.image} alt={song.name} className="w-10 h-10 mr-2 rounded" />
-                                                {index + 1}
-                                            </td>
-                                            <td className="px-4 py-2">
-                                                <div>{song.name}</div>
-                                                <div className="text-sm text-gray-500">{song.artist}</div>
-                                            </td>
-                                            <td className="px-4 py-2">{song.album}</td>
-                                            <td className="px-4 py-2 text-right">{song.duration}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                        <div className="space-y-2">
+                            {songs.map((song, index) => (
+                                <div 
+                                    key={song.id} 
+                                    className={`flex items-center justify-between p-2 rounded-lg ${index % 2 === 0 ? 'bg-transparent' : 'bg-gray-800 bg-opacity-30'}`}
+                                    onMouseEnter={() => setHoveredSong(song.id)}
+                                    onMouseLeave={() => setHoveredSong(null)}
+                                >
+                                    <div className="flex items-center space-x-3 flex-grow">
+                                        <div className="relative">
+                                            <img src={song.image} alt={song.name} className="w-10 h-10 rounded" />
+                                            {hoveredSong === song.id && (
+                                                <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg">
+                                                    <PlayCircle className="text-white" size={24} />
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div>
+                                            <p className="font-medium">{song.name}</p>
+                                            <p className="text-sm text-gray-400">{song.artist}</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center space-x-4 transition-all duration-300 ease-in-out">
+                                        <span className={`text-sm text-gray-400 transition-all duration-300 ease-in-out ${hoveredSong === song.id ? 'mr-8' : 'mr-0'}`}>
+                                            {song.duration}
+                                        </span>
+                                        {hoveredSong === song.id && (
+                                            <MoreHorizontal className="text-gray-400 cursor-pointer transition-opacity duration-300 ease-in-out opacity-100" size={20} />
+                                        )}
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     )}
                 </div>
