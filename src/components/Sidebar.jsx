@@ -28,7 +28,7 @@ const SidebarItem = ({ icon: Icon, label, imageSrc, onClick }) => {
             src={imageSrc}
             alt={label}
             className="rounded-lg object-cover"
-            style={{ width: '100%', height: '100%', maxWidth: '3rem', maxHeight: '3rem' }}
+            style={{ width: '100%', height: '100%', maxWidth: '3rem', maxHeight: '3rem', borderRadius: 6 }}
           />
         ) : (
           <Icon className="text-white w-8 h-8" />
@@ -37,7 +37,8 @@ const SidebarItem = ({ icon: Icon, label, imageSrc, onClick }) => {
 
       {isHovered && (
         imageSrc ? (
-          <span className="absolute left-full ml-2 px-2 py-1 bg-gray-700 text-white text-xs rounded-lg animate-fade-in">
+          <span className="absolute left-full ml-2 px-2 py-1 bg-gray-700 text-white text-xs animate-fade-in-up" style={{ borderRadius: 12 }}
+          >
             {label}
           </span>
         ) : (
