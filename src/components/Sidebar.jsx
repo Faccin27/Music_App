@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import React, { useState } from 'react';
 import { Home, Music, MapPin, ListMusic } from 'lucide-react';
 import funkImage from '../assets/images/funk.jpg';
 import trapImage from '../assets/images/default.png';

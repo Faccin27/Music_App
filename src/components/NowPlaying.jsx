@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from './ui/button';
 import wiu from '../assets/images/futil.png';
 import { Play, Pause, SkipForward, SkipBack, Shuffle, Repeat, Heart, SpeakerHigh, List } from "@phosphor-icons/react";
