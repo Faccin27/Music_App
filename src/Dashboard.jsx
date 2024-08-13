@@ -1,7 +1,6 @@
-import React from 'react';
+import MusicPlayer from './components/MusicPlayer';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
-import MusicPlayer from './components/MusicPlayer';
 
 
 const App = () => {

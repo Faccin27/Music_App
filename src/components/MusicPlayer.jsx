@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import NowPlaying from './NowPlaying';
-import { Button } from '@/components/ui/button';
-import { PlayCircle, MoreHorizontal } from 'lucide-react';
+import { MoreHorizontal, PlayCircle } from 'lucide-react';
+import { useState } from 'react';
 import wiu from '../assets/images/default.png';
-import sertanejoImage from '../assets/images/sertanejo.jpg';
 import eletronicaImage from '../assets/images/eletronica.png';
 import funkImage from '../assets/images/funk.jpg';
 import profileImage from '../assets/images/profile.png';
+import sertanejoImage from '../assets/images/sertanejo.jpg';
+import NowPlaying from './NowPlaying';
 
 const playlists = [
     { id: 1, name: 'Top Hits 2024', image: sertanejoImage, songs: 50, creator: 'Future Rhythm' },

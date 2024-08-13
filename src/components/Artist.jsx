@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import NowPlaying from './NowPlaying';
-import {PlayCircle, MoreHorizontal } from 'lucide-react';
-import { Play, Heart } from '@phosphor-icons/react'; 
+import { Heart, Play } from '@phosphor-icons/react';
+import { MoreHorizontal, PlayCircle } from 'lucide-react';
+import { useState } from 'react';
 import wiu from '../assets/images/default.png';
+import NowPlaying from './NowPlaying';
 import { Button } from './ui/button';
 
 export default function ArtistPage() {

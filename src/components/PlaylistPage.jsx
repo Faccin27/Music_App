@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Play, Heart, Download, PlayCircle, MoreHorizontal } from 'lucide-react';
-import NowPlaying from './NowPlaying';
+import { Download, Heart, MoreHorizontal, Play, PlayCircle } from 'lucide-react';
+import { useState } from 'react';
 import wiu from '../assets/images/eletronica.png';
 import SongImage from '../assets/images/funk.jpg';
+import NowPlaying from './NowPlaying';
 
 const songs = [
   { id: 1, name: 'Envolver', artist: 'Anitta', album: 'Versions of Me', duration: '3:14', image: SongImage },
@@ -23,13 +23,6 @@ const songs = [
   { id: 16, name: 'Medo Bobo', artist: 'Maiara & Maraísa', album: 'Maiara & Maraísa', duration: '3:18', image: SongImage },
 ];
 
-const scrollbarHiddenStyle = {
-  scrollbarWidth: 'none',
-  msOverflowStyle: 'none',
-  '&::-webkit-scrollbar': {
-    display: 'none'
-  }
-};
 
 export default function Component() {
   const [hoveredSong, setHoveredSong] = useState(null);
