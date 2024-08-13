@@ -9,10 +9,12 @@ body {
   backdrop-filter: blur(100px);
 }
 
-.glassmorphism {
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; 
 }
 
 .fade-in {
