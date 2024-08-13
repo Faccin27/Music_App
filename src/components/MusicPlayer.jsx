@@ -33,22 +33,31 @@ const songs = [
     { id: 8, name: 'Amor de Que', artist: 'Pabllo Vittar', album: '111', duration: '2:52', image: wiu },
 ];
 
+const artists = [...new Set(songs.flatMap(song => song.artist.split(', ')))].map(artist => ({
+    name: artist,
+    image: wiu
+}));
+
 export default function MusicPlayer() {
     const [showPlaylists, setShowPlaylists] = useState(false);
     const [showTracks, setShowTracks] = useState(false);
+    const [showArtists, setShowArtists] = useState(false);
     const [hoveredSong, setHoveredSong] = useState(null);
 
     const handlePlaylistsClick = () => {
         setShowPlaylists(true);
         setShowTracks(false);
+        setShowArtists(false);
     };
 
     const handleTracksClick = () => {
         setShowTracks(true);
         setShowPlaylists(false);
+        setShowArtists(false);
     };
 
-    const handleAlbumsClick = () => {
+    const handleArtistsClick = () => {
+        setShowArtists(true);
         setShowPlaylists(false);
         setShowTracks(false);
     };
@@ -60,7 +69,7 @@ export default function MusicPlayer() {
 
                 <div className="w-full md:w-1/2 mt-4 md:mt-0">
                     <div className="flex justify-center mb-4">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-md w-full">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 max-w-md w-full">
                             <div
                                 className="flex items-center justify-center p-2 hover:bg-gray-200 hover:bg-opacity-20 transition duration-300 cursor-pointer"
                                 style={{ borderRadius: '8px' }}
@@ -69,11 +78,11 @@ export default function MusicPlayer() {
                                 <span className="font-medium">Tracks</span>
                             </div>
                             <div
-                                className="flex items-center justify-center p-2 hover:bg-gray-200 hover:bg-opacity-20 transition duration-300"
+                                className="flex items-center justify-center p-2 hover:bg-gray-200 hover:bg-opacity-20 transition duration-300 cursor-pointer"
                                 style={{ borderRadius: '8px' }}
-                                onClick={handleAlbumsClick}
+                                onClick={handleArtistsClick}
                             >
-                                <span className="font-medium">Albums</span>
+                                <span className="font-medium">Artists</span>
                             </div>
                             <div
                                 className="flex items-center justify-center p-2 hover:bg-gray-200 hover:bg-opacity-20 transition duration-300 cursor-pointer"
@@ -106,8 +115,8 @@ export default function MusicPlayer() {
                     {showTracks && (
                         <div className="space-y-2">
                             {songs.map((song, index) => (
-                                <div 
-                                    key={song.id} 
+                                <div
+                                    key={song.id}
                                     className={`flex items-center justify-between p-2 rounded-lg ${index % 2 === 0 ? 'bg-transparent' : 'bg-gray-800 bg-opacity-30'}`}
                                     onMouseEnter={() => setHoveredSong(song.id)}
                                     onMouseLeave={() => setHoveredSong(null)}
@@ -138,8 +147,26 @@ export default function MusicPlayer() {
                             ))}
                         </div>
                     )}
+
+                    {showArtists && (
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 gap-4 w-full">
+                            {artists.map((artist, index) => (
+                                <div key={index} className='flex flex-col items-center'>
+                                <div className='w-36 h-36 relative'>
+                                    <img
+                                        src={artist.image}
+                                        alt={artist.name}
+                                        className='w-full h-full object-cover rounded-full'
+                                    />
+                                </div>
+                            <p className='mt-2 text-center text-sm font-medium'>{artist.name}</p>
+                    </div>
+                    ))}
                 </div>
-            </main>
+                    )}
+
         </div>
+            </main >
+        </div >
     );
 }
