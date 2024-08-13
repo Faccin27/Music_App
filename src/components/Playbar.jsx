@@ -1,8 +1,8 @@
-import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
+import React, { useState } from 'react';
+import { Play, Pause, SkipBack, SkipForward, Volume2, ChevronUp, Plus } from 'lucide-react';
 import { Slider } from '@radix-ui/react-slider';
-import { ChevronUp, Pause, Play, Plus, SkipBack, SkipForward, Volume2 } from 'lucide-react';
-import { useState } from 'react';
-import Imageplayingnow from '../assets/images/default.png';
+import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
+import Imageplayingnow from '../assets/images/default.png'
 
 const Playbar = () => {
   const [isPlaying, setIsPlaying] = useState(true);
