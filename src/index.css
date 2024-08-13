@@ -25,3 +25,7 @@ html, body, #root {
 .fade-in.show {
   opacity: 1;
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

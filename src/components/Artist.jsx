@@ -37,7 +37,7 @@ export default function ArtistPage() {
       </div>
 
       {/* Artist page na direita */}
-      <div className="w-1/2 p-8 overflow-y-auto">
+      <div className="w-1/2 p-8 overflow-y-auto max-h-screen scrollbar-hide">
         <div className="max-w-2xl mx-auto">
           <div className="flex flex-col items-center text-center mb-6">
             <img src={artist.image} alt={artist.name} className="w-64 h-64 rounded-full mb-4" />

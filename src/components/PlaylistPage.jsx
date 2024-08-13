@@ -23,19 +23,18 @@ const songs = [
   { id: 16, name: 'Medo Bobo', artist: 'Maiara & Maraísa', album: 'Maiara & Maraísa', duration: '3:18', image: SongImage },
 ];
 
-
 export default function Component() {
   const [hoveredSong, setHoveredSong] = useState(null);
 
   return (
-    <div className="text-white min-h-screen p-8 flex justify-center items-start">
+    <div className="text-white min-h-screen p-8 flex">
       {/* LEFT SIDE TOCANDO AGORA */}
       <div className="w-full md:w-1/2 mt-4 md:mt-0 flex justify-center">
         <NowPlaying />
       </div>
 
-      {/* Right side - Playlist */}
-      <div className="w-1/2">
+      {/* RIGHT SIDE - Playlist */}
+      <div className="w-1/2 h-screen overflow-y-auto scrollbar-hide">
         <div className="mx-auto">
           <img
             src={wiu}
@@ -43,7 +42,7 @@ export default function Component() {
             className="w-56 h-56 object-cover mx-auto mb-4"
             style={{
               borderRadius: '0.375rem',
-              marginBottom: '7dvh'
+              marginBottom: '7dvh',
             }}
           />
           <h1 className="text-3xl font-bold text-center mb-4">Top Brasil</h1>
@@ -99,7 +98,6 @@ export default function Component() {
               </div>
             ))}
           </div>
-
         </div>
       </div>
     </div>
