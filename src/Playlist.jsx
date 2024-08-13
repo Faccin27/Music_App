@@ -1,7 +1,5 @@
-import React from 'react';
 import Navbar from './components/Navbar';
 import PlaylistPage from './components/PlaylistPage';
-import Playbar from './components/Playbar';
 import Sidebar from './components/Sidebar';
 
 const App = () => {
