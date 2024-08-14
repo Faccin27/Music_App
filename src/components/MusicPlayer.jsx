@@ -76,7 +76,7 @@ export default function MusicPlayer() {
             <main className="flex-1 flex flex-col md:flex-row items-start justify-center p-4 md:p-8">
                 <NowPlaying />
 
-                <div className="w-full md:w-1/2 mt-4 md:mt-0">
+                <div className="w-full md:w-1/2 mt-40 md:mt-0">
                     <div className="flex justify-center mb-4">
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 max-w-md w-full">
                             <div
@@ -167,7 +167,7 @@ export default function MusicPlayer() {
                                         <img
                                             src={artist.image}
                                             alt={artist.name}
-                                            className="w-24 h-24 object-cover rounded-full"
+                                            className="w-48 h-48 object-cover rounded-full"
                                         />
                                         <p className="mt-2 text-center text-sm font-medium">{artist.name}</p>
                                     </div>

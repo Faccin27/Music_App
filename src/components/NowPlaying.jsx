@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
-import wiu from '../assets/images/futil.png';
+import wiu from '../assets/images/ritmada2.png';
 import { Play, Pause, SkipForward, SkipBack, Shuffle, Repeat, Heart, SpeakerHigh, List } from "@phosphor-icons/react";
+import updateBackground from './ui/UpdateBackgroud'; 
 
 export default function NowPlaying() {
     const [isPlaying, setIsPlaying] = useState(false);
     const [isShuffling, setIsShuffling] = useState(false);
     const [isRepeating, setIsRepeating] = useState(false);
+
+    useEffect(() => {
+        updateBackground(wiu); 
+    }, [wiu]);
 
     const togglePlayPause = () => {
         setIsPlaying(!isPlaying);
