@@ -167,7 +167,7 @@ export default function MusicPlayer() {
                                         <img
                                             src={artist.image}
                                             alt={artist.name}
-                                            className="w-48 h-48 object-cover rounded-full"
+                                            className="w-48 h- object-cover rounded-full"
                                         />
                                         <p className="mt-2 text-center text-sm font-medium">{artist.name}</p>
                                     </div>

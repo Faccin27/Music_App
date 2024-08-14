@@ -39,10 +39,14 @@ const Navbar = () => {
       <div className="relative flex items-center">
         <input
           type="text"
-          placeholder="Busque por músicas, playlists, artistas e mais."
-          className="bg-black bg-opacity-60 backdrop-blur-md shadow-lg rounded-full p-2 pl-10 pr-4 outline-none w-96" 
+          placeholder="Busque por músicas, playlists, artistas e muito mais."
+          className="bg-black backdrop-blur-md shadow-lg p-2 pr-10 pl-4 outline-none"
+          style={{
+            borderRadius: 12,
+            width: 750
+          }}
         />
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white" /> {/* Ícone da lupa */}
+        <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white" /> {/* Ícone da lupa */}
       </div>
       <div
         className="relative flex items-center"

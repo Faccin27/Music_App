@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
-import wiu from '../assets/images/ritmada2.png';
+import wiu from '../assets/images/futil.png';
 import { Play, Pause, SkipForward, SkipBack, Shuffle, Repeat, Heart, SpeakerHigh, List } from "@phosphor-icons/react";
-import updateBackground from './ui/UpdateBackgroud'; 
+import updateBackground from './ui/UpdateBackgroud';
 
 export default function NowPlaying() {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -10,7 +10,7 @@ export default function NowPlaying() {
     const [isRepeating, setIsRepeating] = useState(false);
 
     useEffect(() => {
-        updateBackground(wiu); 
+        updateBackground(wiu);
     }, [wiu]);
 
     const togglePlayPause = () => {
@@ -85,25 +85,26 @@ export default function NowPlaying() {
                         </Button>
                     </div>
                 </div>
-            </div>
 
-            <div className="flex items-center justify-center w-full mt-[17dvh] mb-4">
-                <div className="flex items-center gap-6">
-                    <Button variant="ghost" size="icon">
-                        <Heart className="w-6 h-6" />
-                    </Button>
-                    <div className='flex items-center gap-2'>
+
+                <div className="flex items-center justify-center w-full mt-[17dvh] mb-4">
+                    <div className="flex items-center gap-6">
                         <Button variant="ghost" size="icon">
-                            <SpeakerHigh className="w-6 h-6" />
+                            <Heart className="w-6 h-6" />
                         </Button>
-                        <div className="relative h-2 bg-muted-foreground/20 rounded-full w-24">
-                            <div className="absolute inset-y-0 left-0 bg-gray-400" style={{ width: '100%', borderRadius: 50 }} />
-                            <div className="bg-primary bg-white absolute inset-y-0 left-0" style={{ width: '45%', borderRadius: 50 }} />
+                        <div className='flex items-center gap-2'>
+                            <Button variant="ghost" size="icon">
+                                <SpeakerHigh className="w-6 h-6" />
+                            </Button>
+                            <div className="relative h-2 bg-muted-foreground/20 rounded-full w-24">
+                                <div className="absolute inset-y-0 left-0 bg-gray-400" style={{ width: '100%', borderRadius: 50 }} />
+                                <div className="bg-primary bg-white absolute inset-y-0 left-0" style={{ width: '45%', borderRadius: 50 }} />
+                            </div>
                         </div>
+                        <Button variant="ghost" size="icon">
+                            <List className="w-6 h-6" />
+                        </Button>
                     </div>
-                    <Button variant="ghost" size="icon">
-                        <List className="w-6 h-6" />
-                    </Button>
                 </div>
             </div>
         </div>
