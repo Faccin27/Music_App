@@ -124,6 +124,8 @@ export default function ArtistPage() {
                 className={`flex items-center justify-between p-2 rounded-lg ${index % 2 === 0 ? 'bg-transparent' : 'bg-gray-800 bg-opacity-30'}`}
                 onMouseEnter={() => setHoveredSong(song.id)}
                 onMouseLeave={() => setHoveredSong(null)}
+                style={{ borderRadius: 8 }}
+
               >
                 <div className="flex items-center space-x-3 flex-grow">
                   <div className="relative">

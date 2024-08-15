@@ -185,6 +185,8 @@ export default function Component() {
                 className={`flex items-center justify-between p-2 rounded-lg ${index % 2 === 0 ? 'bg-transparent' : 'bg-gray-800 bg-opacity-30'}`}
                 onMouseEnter={() => setHoveredSong(song.id)}
                 onMouseLeave={() => setHoveredSong(null)}
+                style={{ borderRadius: 8 }}
+
               >
                 <div className="flex items-center space-x-3 flex-grow">
                   <div className="relative">
@@ -192,6 +194,7 @@ export default function Component() {
                       src={song.image}
                       alt={song.name}
                       className="w-10 h-10 rounded"
+                      
                     />
                     {hoveredSong === song.id && (
                       <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg">

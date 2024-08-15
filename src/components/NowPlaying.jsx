@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Button } from './ui/button'
-import wiu from '../assets/images/problema.png'
+import wiu from '../assets/images/sertanejo.jpg'
 import {
   Play,
   Pause,

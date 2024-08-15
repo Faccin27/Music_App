@@ -233,8 +233,8 @@ const artists = [
 }))
 
 export default function MusicPlayer() {
-  const [showPlaylists, setShowPlaylists] = useState(true)
-  const [showTracks, setShowTracks] = useState(false)
+  const [showPlaylists, setShowPlaylists] = useState(false)
+  const [showTracks, setShowTracks] = useState(true)
   const [showArtists, setShowArtists] = useState(false)
   const [hoveredSong, setHoveredSong] = useState(null)
 
