@@ -1,18 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from './ui/button';
-import wiu from '../assets/images/futil.png';
+import wiu from '../assets/images/problema.png';
 import { Play, Pause, SkipForward, SkipBack, Shuffle, Repeat, Heart, SpeakerHigh, List } from "@phosphor-icons/react";
 import updateBackground from './ui/UpdateBackgroud';
+import GetDominantColor from '../utils/GetDominantColor';
 
 export default function NowPlaying() {
     const [isPlaying, setIsPlaying] = useState(false);
     const [isShuffling, setIsShuffling] = useState(false);
     const [isRepeating, setIsRepeating] = useState(false);
+    const [dominantColor, setDominantColor] = useState("#000000");
+
+    const imgRef = useRef(null);
 
     useEffect(() => {
         updateBackground(wiu);
     }, [wiu]);
 
+    useEffect(() => {
+        const imageElement = imgRef.current;
+        if (imageElement) {
+            const color = GetDominantColor(imageElement, 4);
+            setDominantColor(color);
+        }
+    }, [wiu]);
+
+    console.log(dominantColor)
     const togglePlayPause = () => {
         setIsPlaying(!isPlaying);
     };
@@ -35,7 +48,10 @@ export default function NowPlaying() {
     };
 
     return (
-        <div className="flex flex-col items-center justify-between gap-2 w-full md:w-1/2 min-h-full">
+        <div 
+            className="flex flex-col items-center justify-between gap-2 w-full md:w-1/2 min-h-full"
+            
+        >
             <div className="flex flex-col items-center justify-start w-full">
                 <div className="relative w-full max-w-md aspect-square rounded-lg overflow-hidden">
                     <img
@@ -43,6 +59,7 @@ export default function NowPlaying() {
                         alt="Album Cover"
                         className="object-cover w-full h-full"
                         style={{ borderRadius: '8px' }}
+                        ref={imgRef}
                     />
                 </div>
                 <div className="text-center mt-4">
@@ -54,7 +71,7 @@ export default function NowPlaying() {
                         <span className="text-sm text-muted-foreground">{formatTime(currentTime)}</span>
                         <div className="relative flex-1 mx-4 h-2 bg-muted-foreground/20 rounded-full overflow-hidden">
                             <div className="absolute inset-y-0 left-0 bg-gray-400" style={{ width: '100%' }} />
-                            <div className="bg-primary bg-white absolute inset-y-0 left-0" style={{ width: '45%' }} />
+                            <div className="absolute inset-y-0 left-0" style={{ width: '45%', backgroundColor: dominantColor }} />
                         </div>
                         <span className="text-sm text-muted-foreground">{formatTime(totalTime)}</span>
                     </div>
@@ -86,11 +103,10 @@ export default function NowPlaying() {
                     </div>
                 </div>
 
-
                 <div className="flex items-center justify-center w-full mt-[17dvh] mb-4">
                     <div className="flex items-center gap-6">
                         <Button variant="ghost" size="icon">
-                            <Heart className="w-6 h-6" />
+                            <Heart weight="bold" className='h-6 w-6' style={{ color: dominantColor }}  />
                         </Button>
                         <div className='flex items-center gap-2'>
                             <Button variant="ghost" size="icon">
@@ -98,7 +114,7 @@ export default function NowPlaying() {
                             </Button>
                             <div className="relative h-2 bg-muted-foreground/20 rounded-full w-24">
                                 <div className="absolute inset-y-0 left-0 bg-gray-400" style={{ width: '100%', borderRadius: 50 }} />
-                                <div className="bg-primary bg-white absolute inset-y-0 left-0" style={{ width: '45%', borderRadius: 50 }} />
+                                <div className=" absolute inset-y-0 left-0" style={{ width: '45%', borderRadius: 50, backgroundColor: dominantColor }} />
                             </div>
                         </div>
                         <Button variant="ghost" size="icon">
