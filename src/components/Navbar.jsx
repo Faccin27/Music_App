@@ -1,37 +1,37 @@
-import React, { useState } from 'react';
-import { Search } from 'lucide-react';
-import profilepic from '../assets/images/profile.png';
+import { Search } from 'lucide-react'
+import { useState } from 'react'
+import profilepic from '../assets/images/profile.png'
 
 const UsuarioLogado = [
-  { id: 1, name: 'Faccin', email: 'faccin@example.com', avatar: profilepic }
+  { id: 1, name: 'Faccin', email: 'faccin@example.com', avatar: profilepic },
 ]
 
 const Navbar = () => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isDropdownHovered, setIsDropdownHovered] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const [isDropdownHovered, setIsDropdownHovered] = useState(false)
 
   const handleMouseEnter = () => {
-    setIsDropdownOpen(true);
-    setIsDropdownHovered(true);
-  };
+    setIsDropdownOpen(true)
+    setIsDropdownHovered(true)
+  }
 
   const handleMouseLeave = () => {
     if (!isDropdownHovered) {
-      setIsDropdownOpen(false);
+      setIsDropdownOpen(false)
     }
-  };
+  }
 
   const handleDropdownClick = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-    setIsDropdownHovered(true);
-  };
+    setIsDropdownOpen(!isDropdownOpen)
+    setIsDropdownHovered(true)
+  }
 
   const handleDropdownClose = () => {
-    setIsDropdownHovered(false);
+    setIsDropdownHovered(false)
     if (!isDropdownOpen) {
-      setIsDropdownOpen(false);
+      setIsDropdownOpen(false)
     }
-  };
+  }
 
   return (
     <nav className="bg-black bg-opacity-80 backdrop-blur-md shadow-lg fixed top-0 left-0 w-full z-10 flex justify-between items-center p-4 h-16">
@@ -43,10 +43,11 @@ const Navbar = () => {
           className="bg-black backdrop-blur-md shadow-lg p-2 pr-10 pl-4 outline-none"
           style={{
             borderRadius: 12,
-            width: 750
+            width: 750,
           }}
         />
-        <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white" /> {/* Ícone da lupa */}
+        <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white" />{' '}
+        {/* Ícone da lupa */}
       </div>
       <div
         className="relative flex items-center"
@@ -65,7 +66,7 @@ const Navbar = () => {
             style={{
               borderRadius: '0.5rem',
               transition: 'opacity 300ms ease-in-out',
-              opacity: isDropdownOpen ? 1 : 0
+              opacity: isDropdownOpen ? 1 : 0,
             }}
             onClick={handleDropdownClick}
             onMouseEnter={() => setIsDropdownHovered(true)}
@@ -78,19 +79,27 @@ const Navbar = () => {
                 className="w-12 h-12 rounded-full"
               />
               <div className="ml-3">
-                <div className="text-white font-bold">{UsuarioLogado[0].name}</div>
-                <div className="text-gray-300 text-sm">{UsuarioLogado[0].email}</div>
+                <div className="text-white font-bold">
+                  {UsuarioLogado[0].name}
+                </div>
+                <div className="text-gray-300 text-sm">
+                  {UsuarioLogado[0].email}
+                </div>
               </div>
             </div>
             <div className="flex flex-col">
-              <button className="p-3 hover:bg-gray-700 text-left text-white border-b border-gray-700">Profile</button>
-              <button className="p-3 hover:bg-gray-700 text-left text-white ">Settings</button>
+              <button className="p-3 hover:bg-gray-700 text-left text-white border-b border-gray-700">
+                Profile
+              </button>
+              <button className="p-3 hover:bg-gray-700 text-left text-white ">
+                Settings
+              </button>
             </div>
           </div>
         )}
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

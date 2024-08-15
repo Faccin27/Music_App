@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { Home, Music, MapPin, ListMusic } from 'lucide-react';
-import funkImage from '../assets/images/funk.jpg';
-import trapImage from '../assets/images/default.png';
-import sertanejoImage from '../assets/images/sertanejo.jpg';
-import eletronicaImage from '../assets/images/eletronica.png';
+import { Home, ListMusic, MapPin, Music } from 'lucide-react'
+import { useState } from 'react'
+import trapImage from '../assets/images/default.png'
+import eletronicaImage from '../assets/images/eletronica.png'
+import funkImage from '../assets/images/funk.jpg'
+import sertanejoImage from '../assets/images/sertanejo.jpg'
 
 const SidebarItem = ({ icon: Icon, label, imageSrc, onClick }) => {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState(false)
 
   return (
     <li className="relative flex items-center h-16">
@@ -20,7 +20,9 @@ const SidebarItem = ({ icon: Icon, label, imageSrc, onClick }) => {
           justifyContent: 'center',
           alignItems: 'center',
           borderRadius: '0.375rem',
-          backgroundColor: isHovered ? 'rgba(107, 114, 128, 0.5)' : 'transparent',
+          backgroundColor: isHovered
+            ? 'rgba(107, 114, 128, 0.5)'
+            : 'transparent',
         }}
       >
         {imageSrc ? (
@@ -28,16 +30,24 @@ const SidebarItem = ({ icon: Icon, label, imageSrc, onClick }) => {
             src={imageSrc}
             alt={label}
             className="rounded-lg object-cover"
-            style={{ width: '100%', height: '100%', maxWidth: '3rem', maxHeight: '3rem', borderRadius: 6 }}
+            style={{
+              width: '100%',
+              height: '100%',
+              maxWidth: '3rem',
+              maxHeight: '3rem',
+              borderRadius: 6,
+            }}
           />
         ) : (
           <Icon className="text-white w-8 h-8" />
         )}
       </div>
 
-      {isHovered && (
-        imageSrc ? (
-          <span className="absolute left-full ml-2 px-2 py-1 bg-gray-700 text-white text-xs animate-fade-in-up" style={{ borderRadius: 12 }}
+      {isHovered &&
+        (imageSrc ? (
+          <span
+            className="absolute left-full ml-2 px-2 py-1 bg-gray-700 text-white text-xs animate-fade-in-up"
+            style={{ borderRadius: 12 }}
           >
             {label}
           </span>
@@ -45,20 +55,19 @@ const SidebarItem = ({ icon: Icon, label, imageSrc, onClick }) => {
           <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-white text-xs animate-fade-in">
             {label}
           </span>
-        )
-      )}
+        ))}
     </li>
-  );
-};
+  )
+}
 
 const Sidebar = () => {
-  const [showPlaylists, setShowPlaylists] = useState(false);
+  const [showPlaylists, setShowPlaylists] = useState(false)
 
   const togglePlaylists = () => {
-    setShowPlaylists(!showPlaylists);
-  };
+    setShowPlaylists(!showPlaylists)
+  }
 
-  const playlistImages = [funkImage, trapImage, sertanejoImage, eletronicaImage];
+  const playlistImages = [funkImage, trapImage, sertanejoImage, eletronicaImage]
 
   return (
     <div className="bg-black bg-opacity-80 backdrop-blur-md shadow-lg w-20 p-4 fixed h-full mt-16 mb-24">
@@ -66,17 +75,25 @@ const Sidebar = () => {
         <SidebarItem icon={Home} label="Home" />
         <SidebarItem icon={Music} label="Music" />
         <SidebarItem icon={MapPin} label="Map" />
-        <SidebarItem icon={ListMusic} label="Playlists" onClick={togglePlaylists} />
+        <SidebarItem
+          icon={ListMusic}
+          label="Playlists"
+          onClick={togglePlaylists}
+        />
       </ul>
       {showPlaylists && (
         <ul className="space-y-4 mt-4 animate-fade-in">
           {playlistImages.map((image, index) => (
-            <SidebarItem key={index} imageSrc={image} label={`Playlist ${index + 1}`} />
+            <SidebarItem
+              key={index}
+              imageSrc={image}
+              label={`Playlist ${index + 1}`}
+            />
           ))}
         </ul>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar

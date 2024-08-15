@@ -1,21 +1,37 @@
-import React, { useState } from 'react';
-import { Play, Pause, SkipBack, SkipForward, Volume2, ChevronUp, Plus } from 'lucide-react';
-import { Slider } from '@radix-ui/react-slider';
-import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
+import { useState } from 'react'
+import {
+  Play,
+  Pause,
+  SkipBack,
+  SkipForward,
+  Volume2,
+  ChevronUp,
+  Plus,
+} from 'lucide-react'
+import { Slider } from '@radix-ui/react-slider'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@radix-ui/react-popover'
 import Imageplayingnow from '../assets/images/default.png'
 
 const Playbar = () => {
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [progress, setProgress] = useState(30);
-  const [volume, setVolume] = useState(70);
+  const [isPlaying, setIsPlaying] = useState(true)
+  const [progress, setProgress] = useState(30)
+  const [volume, setVolume] = useState(70)
 
-  const togglePlay = () => setIsPlaying(!isPlaying);
+  const togglePlay = () => setIsPlaying(!isPlaying)
 
   return (
     <div className=" fixed bottom-0 left-0 right-0 backdrop-blur-md shadow-lg text-white p-4">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center space-x-4 w-1/4">
-          <img src={Imageplayingnow} alt="Album cover" className="w-14 h-14 rounded-md" />
+          <img
+            src={Imageplayingnow}
+            alt="Album cover"
+            className="w-14 h-14 rounded-md"
+          />
           <div>
             <h3 className="font-semibold text-sm">Nome da Música</h3>
             <p className="text-xs text-gray-400">Artista</p>
@@ -27,7 +43,10 @@ const Playbar = () => {
             <button className="focus:outline-none text-gray-400 hover:text-white">
               <SkipBack size={20} />
             </button>
-            <button className="focus:outline-none bg-white text-gray-900 rounded-full p-2 hover:bg-gray-200" onClick={togglePlay}>
+            <button
+              className="focus:outline-none bg-white text-gray-900 rounded-full p-2 hover:bg-gray-200"
+              onClick={togglePlay}
+            >
               {isPlaying ? <Pause size={24} /> : <Play size={24} />}
             </button>
             <button className="focus:outline-none text-gray-400 hover:text-white">
@@ -66,9 +85,15 @@ const Playbar = () => {
             </PopoverTrigger>
             <PopoverContent className="w-48 bg-gray-800 border-gray-700">
               <div className="py-1">
-                <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Playlist 1</button>
-                <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Playlist 2</button>
-                <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Nova Playlist</button>
+                <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">
+                  Playlist 1
+                </button>
+                <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">
+                  Playlist 2
+                </button>
+                <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">
+                  Nova Playlist
+                </button>
               </div>
             </PopoverContent>
           </Popover>
@@ -78,13 +103,13 @@ const Playbar = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const formatTime = (seconds) => {
-  const mins = Math.floor(seconds / 60);
-  const secs = seconds % 60;
-  return `${mins}:${secs.toString().padStart(2, '0')}`;
-};
+  const mins = Math.floor(seconds / 60)
+  const secs = seconds % 60
+  return `${mins}:${secs.toString().padStart(2, '0')}`
+}
 
-export default Playbar;
+export default Playbar

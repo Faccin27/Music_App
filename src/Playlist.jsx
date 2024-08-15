@@ -1,8 +1,6 @@
-import React from 'react';
-import Navbar from './components/Navbar';
-import PlaylistPage from './components/PlaylistPage';
-import Playbar from './components/Playbar';
-import Sidebar from './components/Sidebar';
+import Navbar from './components/Navbar'
+import PlaylistPage from './components/PlaylistPage'
+import Sidebar from './components/Sidebar'
 
 const App = () => {
   return (
@@ -10,12 +8,12 @@ const App = () => {
       <Sidebar />
       <div className="flex flex-col flex-1">
         <Navbar />
-        <main className="flex-1 bg-black bg-opacity-60 p-4 ml-20 mt-16"> 
+        <main className="flex-1 bg-black bg-opacity-60 p-4 ml-20 mt-16">
           <PlaylistPage />
         </main>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App
