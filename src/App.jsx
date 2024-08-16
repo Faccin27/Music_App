@@ -1,19 +1,25 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Dashboard from './Dashboard'
-import Playlist from './Playlist'
-import Artist from './Artist'
+// src/App.jsx
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Layout from './components/Layout';
+import Artist from './components/Artist';
+import MusicPlayer from './components/MusicPlayer';
+import PlaylistPage from './components/PlaylistPage';
+import NotFound from './components/NotFound';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/artist" element={<Artist />} />
-        <Route path="/playlist" element={<Playlist />} />
-        <Route path="*" element={<h1>Not found</h1>} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<MusicPlayer />} />
+          <Route path="/artist" element={<Artist />} />
+          <Route path="/playlist" element={<PlaylistPage />} />
+          <Route path="/music" element={<MusicPlayer />} />
+        </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;

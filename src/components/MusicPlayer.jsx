@@ -257,18 +257,21 @@ export default function MusicPlayer() {
   }
 
   return (
-    <div className="flex flex-col h-screen text-foreground">
-      <main className="flex-1 flex flex-col md:flex-row items-start justify-center p-4 md:p-8">
+    <div className="text-white min-h-screen p-8 flex">
+      {/* LEFT SIDE - NowPlaying */}
+      <div className="w-full md:w-1/2 mt-4 md:mt-0 flex justify-center">
         <NowPlaying />
+      </div>
 
-        <div className="w-full md:w-1/2 mt-40 md:mt-0">
-          <div className="flex justify-center mb-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 max-w-md w-full">
-              <div
-                className={`flex items-center justify-center p-2 hover:bg-gray-700 transition duration-300 cursor-pointer ${showTracks ? 'bg-gray-500' : 'bg-transparent'}`}
-                style={{ borderRadius: '8px' }}
-                onClick={handleTracksClick}
-              >
+      {/* RIGHT SIDE - Content */}
+      <div className="w-1/2 h-screen overflow-y-auto scrollbar-hide">
+        <div className="flex justify-center mb-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 max-w-md w-full">
+            <div
+              className={`flex items-center justify-center p-2 hover:bg-gray-700 transition duration-300 cursor-pointer ${showTracks ? 'bg-gray-500' : 'bg-transparent'}`}
+              style={{ borderRadius: '8px' }}
+              onClick={handleTracksClick}
+            >
                 <span className="font-medium">Tracks</span>
               </div>
               <div
@@ -376,7 +379,6 @@ export default function MusicPlayer() {
             )}
           </div>
         </div>
-      </main>
     </div>
   )
 }

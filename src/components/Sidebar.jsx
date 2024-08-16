@@ -1,28 +1,28 @@
 import { Home, ListMusic, MapPin, Music } from 'lucide-react'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import trapImage from '../assets/images/default.png'
 import eletronicaImage from '../assets/images/eletronica.png'
 import funkImage from '../assets/images/funk.jpg'
 import sertanejoImage from '../assets/images/sertanejo.jpg'
 
-const SidebarItem = ({ icon: Icon, label, imageSrc, onClick }) => {
+const SidebarItem = ({ icon: Icon, label, imageSrc, to, onClick }) => {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
     <li className="relative flex items-center h-16">
-      <div
+      <Link
+        to={to}
+        onClick={onClick}
         className={`p-2 hover:bg-gray-500 hover:bg-opacity-50 w-full flex justify-center transition-transform duration-300 ${isHovered ? '-translate-y-1' : ''}`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        onClick={onClick}
         style={{
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           borderRadius: '0.375rem',
-          backgroundColor: isHovered
-            ? 'rgba(107, 114, 128, 0.5)'
-            : 'transparent',
+          backgroundColor: isHovered ? 'rgba(107, 114, 128, 0.5)' : 'transparent',
         }}
       >
         {imageSrc ? (
@@ -41,7 +41,7 @@ const SidebarItem = ({ icon: Icon, label, imageSrc, onClick }) => {
         ) : (
           <Icon className="text-white w-8 h-8" />
         )}
-      </div>
+      </Link>
 
       {isHovered &&
         (imageSrc ? (
@@ -72,9 +72,9 @@ const Sidebar = () => {
   return (
     <div className="bg-black bg-opacity-80 backdrop-blur-md shadow-lg w-20 p-4 fixed h-full mt-16 mb-24">
       <ul className="space-y-4">
-        <SidebarItem icon={Home} label="Home" />
-        <SidebarItem icon={Music} label="Music" />
-        <SidebarItem icon={MapPin} label="Map" />
+        <SidebarItem icon={Home} label="Home" to="/" />
+        <SidebarItem icon={Music} label="Music" to="/artist" />
+        <SidebarItem icon={MapPin} label="Map" to="/playlist" />
         <SidebarItem
           icon={ListMusic}
           label="Playlists"

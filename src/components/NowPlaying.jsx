@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Button } from './ui/button'
-import wiu from '../assets/images/sertanejo.jpg'
+import wiu from '../assets/images/futil.png'
 import {
   Play,
   Pause,
@@ -137,13 +137,16 @@ export default function NowPlaying() {
                 style={{ color: dominantColor }}
               />
             </Button>
+            <Button variant="ghost" size="icon">
+              <List className="w-6 h-6" />
+            </Button>
             <div className="flex items-center gap-2">
               <Button variant="ghost" size="icon">
                 <SpeakerHigh className="w-6 h-6" />
               </Button>
-              <div className="relative h-2 bg-muted-foreground/20 rounded-full w-24">
+              <div className="relative h-1 bg-muted-foreground/20 rounded-full w-24">
                 <div
-                  className="absolute inset-y-0 left-0 bg-gray-400"
+                  className="absolute  inset-y-0 left-0 bg-gray-400"
                   style={{ width: '100%', borderRadius: 50 }}
                 />
                 <div
@@ -156,9 +159,7 @@ export default function NowPlaying() {
                 />
               </div>
             </div>
-            <Button variant="ghost" size="icon">
-              <List className="w-6 h-6" />
-            </Button>
+
           </div>
         </div>
       </div>
