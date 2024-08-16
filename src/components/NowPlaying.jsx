@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useMemo } from 'react'
 import { Button } from './ui/button'
 import wiu from '../assets/images/futil.png'
 import {
@@ -20,8 +20,19 @@ export default function NowPlaying() {
   const [isShuffling, setIsShuffling] = useState(false)
   const [isRepeating, setIsRepeating] = useState(false)
   const [dominantColor, setDominantColor] = useState('#000000')
+  const [currentTime, setCurrentTime] = useState(45)
+  const [isMouseDown, setIsMouseDown] = useState(false)
+  const [mouseHoverPercent, setMouseHoverPercent] = useState(0)
 
+  const totalTime = 263
   const imgRef = useRef(null)
+  const canvasRef = useRef(null)
+
+  const MAX_LINES = 75
+
+  const volumeData = useMemo(() => {
+    return Array.from({ length: MAX_LINES }, () => Math.random() * 0.8 + 0.2)
+  }, [])
 
   useEffect(() => {
     updateBackground(wiu)
@@ -35,7 +46,72 @@ export default function NowPlaying() {
     }
   }, [wiu])
 
-  console.log(dominantColor)
+  useEffect(() => {
+    let animationId
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    const draw = () => {
+      if (!ctx) return
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+      const lineWidth = 1
+      const gap = (canvas.width - MAX_LINES * lineWidth) / (MAX_LINES - 1)
+      const totalWidth = lineWidth + gap
+
+      volumeData.forEach((volume, index) => {
+        const x = index * totalWidth
+        const height = volume * canvas.height
+        const y = (canvas.height - height) / 2
+
+        if (x < (currentTime / totalTime) * canvas.width) {
+          ctx.fillStyle = dominantColor
+        } else {
+          ctx.fillStyle = 'rgba(160, 160, 160, 0.5)' // Semi-transparent gray for unplayed part
+        }
+
+        ctx.fillRect(x, y, lineWidth, height)
+      })
+
+      // Draw progress line
+      ctx.fillStyle = dominantColor
+      ctx.fillRect((currentTime / totalTime) * canvas.width, 0, 2, canvas.height)
+
+      if (isMouseDown) {
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.5)'
+        ctx.fillRect(canvas.width * mouseHoverPercent, 0, 2, canvas.height)
+      }
+
+      animationId = requestAnimationFrame(draw)
+    }
+
+    draw()
+
+    return () => {
+      cancelAnimationFrame(animationId)
+    }
+  }, [currentTime, totalTime, isMouseDown, mouseHoverPercent, volumeData, dominantColor])
+
+  useEffect(() => {
+    let interval
+    if (isPlaying) {
+      interval = setInterval(() => {
+        setCurrentTime((prevTime) => {
+          if (prevTime >= totalTime) {
+            setIsPlaying(false)
+            return 0
+          }
+          return prevTime + 1
+        })
+      }, 1000)
+    }
+    return () => clearInterval(interval)
+  }, [isPlaying, totalTime])
+
   const togglePlayPause = () => {
     setIsPlaying(!isPlaying)
   }
@@ -48,8 +124,28 @@ export default function NowPlaying() {
     setIsRepeating(!isRepeating)
   }
 
-  const currentTime = 45
-  const totalTime = 263
+  const handleMouseDown = (e) => {
+    setIsMouseDown(true)
+    handleMouseMove(e)
+  }
+
+  const handleMouseUp = () => {
+    setIsMouseDown(false)
+  }
+
+  const handleMouseMove = (e) => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const rect = canvas.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const percent = x / rect.width
+    setMouseHoverPercent(percent)
+
+    if (isMouseDown) {
+      setCurrentTime(totalTime * percent)
+    }
+  }
 
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60)
@@ -78,16 +174,16 @@ export default function NowPlaying() {
             <span className="text-sm text-muted-foreground">
               {formatTime(currentTime)}
             </span>
-            <div className="relative flex-1 mx-4 h-2 bg-muted-foreground/20 rounded-full overflow-hidden">
-              <div
-                className="absolute inset-y-0 left-0 bg-gray-400"
-                style={{ width: '100%' }}
-              />
-              <div
-                className="absolute inset-y-0 left-0"
-                style={{ width: '45%', backgroundColor: dominantColor }}
-              />
-            </div>
+            <canvas
+              ref={canvasRef}
+              width={300}
+              height={40}
+              className="cursor-pointer w-full"
+              onMouseDown={handleMouseDown}
+              onMouseUp={handleMouseUp}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseUp}
+            />
             <span className="text-sm text-muted-foreground">
               {formatTime(totalTime)}
             </span>
@@ -159,7 +255,6 @@ export default function NowPlaying() {
                 />
               </div>
             </div>
-
           </div>
         </div>
       </div>
