@@ -10,19 +10,19 @@ export default function Navbar() {
   const [isSearchVisible, setIsSearchVisible] = useState(false)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const dropdownRef = useRef(null)
+  const dropdownRef = useRef()
 
-  const toggleSearch = useCallback(() => {
+  const toggleSearch = () => {
     setIsSearchVisible(!isSearchVisible)
-  }, [isSearchVisible])
+  }
 
-  const toggleDropdown = useCallback(() => {
+  const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen)
-  }, [isDropdownOpen])
+  }
 
   const toggleMobileMenu = useCallback(() => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
-  }, [isMobileMenuOpen])
+  }, [])
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -38,21 +38,16 @@ export default function Navbar() {
   }, [])
 
   return (
+    /* Barra vertical */
     <nav className="bg-black/80 backdrop-blur-md shadow-lg fixed top-0 left-0 w-full z-10 flex justify-between items-center p-4 h-16">
-      <div className="flex items-center">
-        <div className="text-xl font-bold text-white">Music App</div>
-      </div>
-      <div className="hidden md:flex relative items-center flex-1 mx-4">
-        <div className="w-2/5 m-auto relative">
-          <input
-            type="text"
-            placeholder="Busque por músicas, playlists, artistas e muito mais."
-            className="w-full bg-black/30 text-white p-2 pr-10 rounded"
-          />
-          <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white h-5 w-5" />
-        </div>
-      </div>
-      <div className="flex items-center">
+      <div className="flex items-center justify-between w-full">
+
+        {/* Titulo */}
+        <h2 className="text-xl font-bold text-white">Music App</h2>
+    
+      <div className="flex gap-4">
+        
+        {/* Botão para abrir a barra de pesquisa */}
         <button
           onClick={toggleSearch}
           className="md:hidden mr-2 text-white"
@@ -60,6 +55,22 @@ export default function Navbar() {
         >
           <Search className="h-5 w-5" />
         </button>
+
+        {/* Barra de pesquisa */}
+        {isSearchVisible && (
+          <div className="absolute top-16 left-20 right-10  p-4 md:hidden">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Busque por músicas, playlists, artistas e muito mais."
+                className="w-full bg-black/60 text-white p-2 pr-10 rounded"
+              />
+              <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white h-5 w-5" />
+            </div>
+          </div>
+        )}
+
+        {/* Botão para abrir o menu do usuário */}
         <div className="relative" ref={dropdownRef}>
           <button
             onClick={toggleDropdown}
@@ -72,8 +83,11 @@ export default function Navbar() {
               className="w-11 h-11 rounded-full"
             />
           </button>
+
+          
+          {/* Menu do usuário */}
           {isDropdownOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-black/80 shadow-lg py-1"
+            <div className="fixed right-0 mt-2 w-48 bg-black/80 shadow-lg py-1"
               style={{ borderRadius: 8 }}
             >
               <div className="px-4 py-2 text-sm text-white">
@@ -87,20 +101,10 @@ export default function Navbar() {
               <a href="#" className="block px-4 py-2 text-sm text-white hover:bg-gray-700">Log out</a>
             </div>
           )}
-        </div>
-      </div>
-      {isSearchVisible && (
-        <div className="absolute top-16 left-20 right-10  p-4 md:hidden">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Busque por músicas, playlists, artistas e muito mais."
-              className="w-full bg-black/60 text-white p-2 pr-10 rounded"
-            />
-            <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white h-5 w-5" />
+
           </div>
         </div>
-      )}
+      </div>
     </nav>
   )
 }
