@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import NowPlaying from './NowPlaying'
 import { PlayCircle, MoreHorizontal } from 'lucide-react'
-import { Play, Heart } from '@phosphor-icons/react'
+import { Play, Heart, BoomBox } from 'lucide-react';
 import wiu from '../assets/images/default.png'
 import { Button } from './ui/button'
 
@@ -87,12 +87,12 @@ export default function ArtistPage() {
 
   return (
     <div className="text-white min-h-screen p-8 flex justify-center items-start">
-      {/* NowPlaying na esquerda */}
+      {/* NowPlaying on the left */}
       <div className="w-1/2 flex items-center justify-center">
         <NowPlaying />
       </div>
 
-      {/* Artist page na direita */}
+      {/* Artist page on the right */}
       <div className="w-1/2 p-8 overflow-y-auto max-h-screen scrollbar-hide">
         <div className="max-w-2xl mx-auto">
           <div className="flex flex-col items-center text-center mb-6">
@@ -107,13 +107,29 @@ export default function ArtistPage() {
             </p>
           </div>
 
-          <div className="flex space-x-4 justify-center mb-8">
-            <Button className="flex items-center justify-center px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark">
-              <Play className="mr-2 h-5 w-5" weight="fill" /> Play
-            </Button>
-            <Button className="flex items-center justify-center px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white">
-              <Heart className="mr-2 h-5 w-5" weight="fill" /> Like
-            </Button>
+          <div className="flex items-center justify-center mb-8">
+            <div className="h-px w-72 bg-gray-700 mr-4" aria-hidden="true" />
+            <div className="flex space-x-4">
+              <Button 
+                className="flex items-center justify-center p-3 rounded-full bg-transparent hover:bg-gray-800 transition-colors duration-300 group"
+                aria-label="Play"
+              >
+                <Play size={24} strokeWidth={3} className="text-white group-hover:text-primary transition-colors duration-300" />
+              </Button>
+              <Button 
+                className="flex items-center justify-center p-3 rounded-full bg-transparent hover:bg-gray-800 transition-colors duration-300 group"
+                aria-label="Radio"
+              >
+                <BoomBox size={24} strokeWidth={2.5} className="text-white group-hover:text-primary transition-colors duration-300" />
+              </Button>
+              <Button 
+                className="flex items-center justify-center p-3 rounded-full bg-transparent hover:bg-gray-800 transition-colors duration-300 group"
+                aria-label="Like"
+              >
+                <Heart size={24} strokeWidth={3} className="text-white group-hover:text-primary transition-colors duration-300" />
+              </Button>
+            </div>
+            <div className="h-px w-72 bg-gray-700 ml-4" aria-hidden="true" />
           </div>
 
           <h2 className="text-2xl font-semibold mb-4">Top Songs</h2>
@@ -124,8 +140,6 @@ export default function ArtistPage() {
                 className={`flex items-center justify-between p-2 rounded-lg ${index % 2 === 0 ? 'bg-transparent' : 'bg-gray-800 bg-opacity-30'}`}
                 onMouseEnter={() => setHoveredSong(song.id)}
                 onMouseLeave={() => setHoveredSong(null)}
-                style={{ borderRadius: 8 }}
-
               >
                 <div className="flex items-center space-x-3 flex-grow">
                   <div className="relative">
@@ -162,8 +176,8 @@ export default function ArtistPage() {
             ))}
           </div>
 
-          <h2 className="text-2xl font-semibold mb-4">Albums</h2>
-          <div className="grid grid-cols-2 gap-4">
+          <h2 className="text-2xl font-semibold mb-4 mt-8">Albums</h2>
+          <div className="grid grid-cols-2 gap-4 mb-36">
             {artist.albums.map((album) => (
               <div
                 key={album.id}
